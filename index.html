@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
-    <title>ENIGMA MACHINE ULTRA - Visualisasi Sinyal Lengkap</title>
+    <title>ENIGMA MACHINE ULTRA PRO - Visualisasi Sinyal Lengkap dengan Suara</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -923,6 +923,176 @@
             to { transform: translateX(0); opacity: 1; }
         }
         
+        /* Sound Control */
+        .sound-control {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 2000;
+        }
+        
+        .sound-btn {
+            background: linear-gradient(135deg, rgba(25, 30, 50, 0.95), rgba(15, 20, 40, 0.95));
+            backdrop-filter: blur(10px);
+            border: 2px solid var(--accent-quaternary);
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 20px;
+            color: white;
+            margin-bottom: 10px;
+            transition: all 0.3s;
+        }
+        
+        .sound-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 20px var(--accent-quaternary);
+        }
+        
+        .sound-btn.active {
+            background: var(--accent-quaternary);
+            color: var(--primary-dark);
+        }
+        
+        /* Advanced Settings Panel */
+        .advanced-settings {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            z-index: 1500;
+        }
+        
+        .advanced-btn {
+            background: linear-gradient(135deg, rgba(25, 30, 50, 0.95), rgba(15, 20, 40, 0.95));
+            backdrop-filter: blur(10px);
+            border: 2px solid var(--accent-quinary);
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 20px;
+            color: white;
+            transition: all 0.3s;
+        }
+        
+        .advanced-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 20px var(--accent-quinary);
+        }
+        
+        .advanced-panel {
+            position: absolute;
+            bottom: 60px;
+            left: 0;
+            background: linear-gradient(135deg, rgba(25, 30, 50, 0.98), rgba(15, 20, 40, 0.98));
+            border: 2px solid var(--accent-quinary);
+            border-radius: 15px;
+            padding: 15px;
+            width: 300px;
+            display: none;
+            backdrop-filter: blur(15px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.7);
+        }
+        
+        .advanced-panel.active {
+            display: block;
+            animation: slideUp 0.3s ease-out;
+        }
+        
+        .volume-control {
+            width: 100%;
+            margin: 15px 0;
+        }
+        
+        .volume-slider {
+            -webkit-appearance: none;
+            width: 100%;
+            height: 8px;
+            border-radius: 4px;
+            background: rgba(255, 255, 255, 0.1);
+            outline: none;
+        }
+        
+        .volume-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: var(--accent-quaternary);
+            cursor: pointer;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        }
+        
+        /* Enhanced UKW Buttons */
+        .ukw-btn.enhanced {
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        .ukw-btn.enhanced::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: 0.5s;
+        }
+        
+        .ukw-btn.enhanced:hover::before {
+            left: 100%;
+        }
+        
+        .ukw-btn.enhanced.active {
+            animation: ukw-pulse 2s infinite;
+            transform: scale(1.05);
+        }
+        
+        @keyframes ukw-pulse {
+            0% { box-shadow: 0 0 0 0 rgba(0, 168, 255, 0.7); }
+            70% { box-shadow: 0 0 0 10px rgba(0, 168, 255, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(0, 168, 255, 0); }
+        }
+        
+        /* Haptic feedback effect */
+        .haptic {
+            animation: haptic 0.1s;
+        }
+        
+        @keyframes haptic {
+            0% { transform: translateX(0); }
+            25% { transform: translateX(-2px); }
+            75% { transform: translateX(2px); }
+            100% { transform: translateX(0); }
+        }
+        
+        /* Typewriter effect */
+        .typewriter {
+            overflow: hidden;
+            border-right: .15em solid var(--accent-primary);
+            white-space: nowrap;
+            animation: typing 3.5s steps(40, end), blink-caret .75s step-end infinite;
+        }
+        
+        @keyframes typing {
+            from { width: 0 }
+            to { width: 100% }
+        }
+        
+        @keyframes blink-caret {
+            from, to { border-color: transparent }
+            50% { border-color: var(--accent-primary) }
+        }
+        
         /* Responsive design */
         @media (max-width: 1536px) {
             .key {
@@ -1004,6 +1174,16 @@
             .step-visualization {
                 width: 95%;
             }
+            
+            .sound-control, .advanced-settings {
+                top: 10px;
+                left: 10px;
+            }
+            
+            .theme-selector {
+                top: 10px;
+                right: 10px;
+            }
         }
         
         @media (max-width: 768px) {
@@ -1061,13 +1241,16 @@
                 bottom: 80px;
             }
             
-            .theme-selector {
-                top: 10px;
-                right: 10px;
+            .theme-panel, .advanced-panel {
+                width: 280px;
             }
             
-            .theme-panel {
-                width: 280px;
+            .sound-control, .advanced-settings {
+                position: relative;
+                top: auto;
+                left: auto;
+                display: inline-block;
+                margin-right: 10px;
             }
         }
         
@@ -1101,9 +1284,21 @@
                 width: 250px;
             }
             
-            .theme-panel {
+            .theme-panel, .advanced-panel {
                 width: 250px;
             }
+            
+            .sound-btn, .advanced-btn, .theme-btn {
+                width: 40px;
+                height: 40px;
+                font-size: 16px;
+            }
+        }
+        
+        /* Performance optimization */
+        .performance-optimized {
+            will-change: transform, opacity;
+            transform: translateZ(0);
         }
     </style>
 </head>
@@ -1125,12 +1320,57 @@
         </div>
     </div>
     
+    <!-- Sound Control -->
+    <div class="sound-control">
+        <div class="sound-btn active" id="sound-toggle" title="Nyalakan/Matikan Suara">
+            <i class="fas fa-volume-up" id="sound-icon"></i>
+        </div>
+        <div class="sound-btn" id="volume-control-btn" title="Kontrol Volume">
+            <i class="fas fa-sliders-h"></i>
+        </div>
+        
+        <div class="advanced-panel" id="sound-panel">
+            <h3 class="text-lg font-bold mb-3" style="color: var(--accent-quaternary);">
+                <i class="fas fa-volume-up mr-2"></i>PENGATURAN SUARA
+            </h3>
+            <div class="space-y-4">
+                <div>
+                    <div class="flex justify-between mb-2">
+                        <span class="text-gray-300">Volume Ketikan:</span>
+                        <span id="volume-value" class="text-yellow-300 font-bold">70%</span>
+                    </div>
+                    <input type="range" min="0" max="100" value="70" class="volume-slider" id="volume-slider">
+                </div>
+                
+                <div>
+                    <div class="text-gray-300 mb-2">Jenis Suara:</div>
+                    <div class="flex flex-wrap gap-2">
+                        <div class="speed-option active" data-sound="typewriter">
+                            <i class="fas fa-keyboard mr-2"></i> Mesin Ketik
+                        </div>
+                        <div class="speed-option" data-sound="mechanical">
+                            <i class="fas fa-cog mr-2"></i> Mekanikal
+                        </div>
+                        <div class="speed-option" data-sound="electronic">
+                            <i class="fas fa-bolt mr-2"></i> Elektronik
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="text-sm text-gray-400">
+                    <i class="fas fa-info-circle mr-1"></i>
+                    Suara memberikan umpan balik haptic yang meningkatkan pengalaman
+                </div>
+            </div>
+        </div>
+    </div>
+    
     <!-- Theme Selector -->
     <div class="theme-selector">
-        <div class="theme-btn" id="theme-toggle">
+        <div class="theme-btn" id="theme-toggle" title="Pilih Tema">
             <i class="fas fa-palette"></i>
         </div>
-        <div class="theme-btn" id="dark-light-toggle">
+        <div class="theme-btn" id="dark-light-toggle" title="Mode Gelap/Terang">
             <i class="fas fa-moon"></i>
         </div>
         
@@ -1158,6 +1398,63 @@
                 <div class="theme-option" data-theme="neumorphism">
                     <div class="theme-preview" style="background: linear-gradient(135deg, #e0e5ec, #c8d0e7);"></div>
                     <span>Neumorphism</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Advanced Settings -->
+    <div class="advanced-settings">
+        <div class="advanced-btn" id="advanced-toggle" title="Pengaturan Lanjutan">
+            <i class="fas fa-cogs"></i>
+        </div>
+        
+        <div class="advanced-panel" id="advanced-panel">
+            <h3 class="text-lg font-bold mb-3" style="color: var(--accent-quinary);">
+                <i class="fas fa-cogs mr-2"></i>PENGATURAN LANJUTAN
+            </h3>
+            <div class="space-y-4">
+                <div>
+                    <div class="flex justify-between items-center mb-2">
+                        <span class="text-gray-300">Umpan Balik Haptic:</span>
+                        <div class="relative">
+                            <input type="checkbox" id="haptic-toggle" class="hidden">
+                            <label for="haptic-toggle" class="toggle-switch"></label>
+                        </div>
+                    </div>
+                    <div class="text-sm text-gray-400">Getarkan saat mengetik</div>
+                </div>
+                
+                <div>
+                    <div class="flex justify-between items-center mb-2">
+                        <span class="text-gray-300">Auto-rotate Rotor:</span>
+                        <div class="relative">
+                            <input type="checkbox" id="autorotate-toggle" class="hidden" checked>
+                            <label for="autorotate-toggle" class="toggle-switch"></label>
+                        </div>
+                    </div>
+                    <div class="text-sm text-gray-400">Putar otomatis setelah setiap ketikan</div>
+                </div>
+                
+                <div>
+                    <div class="text-gray-300 mb-2">Animasi:</div>
+                    <div class="flex flex-wrap gap-2">
+                        <div class="speed-option active" data-animation="smooth">
+                            <i class="fas fa-wave-square mr-2"></i> Halus
+                        </div>
+                        <div class="speed-option" data-animation="fast">
+                            <i class="fas fa-tachometer-alt mr-2"></i> Cepat
+                        </div>
+                        <div class="speed-option" data-animation="minimal">
+                            <i class="fas fa-minus-circle mr-2"></i> Minimal
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="pt-3 border-t border-gray-700">
+                    <button id="export-settings" class="w-full px-4 py-2 bg-blue-600 hover:bg-blue-700 rounded-lg font-bold">
+                        <i class="fas fa-download mr-2"></i> Ekspor Semua Pengaturan
+                    </button>
                 </div>
             </div>
         </div>
@@ -1377,16 +1674,16 @@
     <div class="container mx-auto px-4 py-8 max-w-7xl">
         <!-- Header -->
         <header class="text-center mb-12 fade-in">
-            <h1 class="main-title text-5xl md:text-6xl mb-6">
-                <i class="fas fa-user-secret mr-4"></i>ENIGMA MACHINE ULTRA
+            <h1 class="main-title text-5xl md:text-6xl mb-6 typewriter">
+                <i class="fas fa-user-secret mr-4"></i>ENIGMA MACHINE ULTRA PRO
             </h1>
-            <p class="text-2xl text-blue-300 mb-4">Visualisasi Proses Enkripsi Lengkap</p>
+            <p class="text-2xl text-blue-300 mb-4">Visualisasi Proses Enkripsi Lengkap dengan Suara</p>
             <p class="text-xl text-gray-400">Dibuat oleh <span class="text-yellow-400 font-bold">Evan Fauzan</span></p>
             
             <!-- Status Bar -->
             <div class="flex flex-wrap justify-center items-center gap-6 mt-8 glass-panel max-w-3xl mx-auto">
                 <div class="flex items-center gap-3">
-                    <div class="w-3 h-3 rounded-full bg-green-500"></div>
+                    <div class="w-3 h-3 rounded-full bg-green-500 animate-pulse"></div>
                     <span class="text-base font-semibold">Sistem: <span class="text-green-400">SIAP</span></span>
                 </div>
                 <div class="flex items-center gap-3">
@@ -1400,6 +1697,10 @@
                 <div class="flex items-center gap-3">
                     <div class="w-3 h-3 rounded-full bg-purple-500"></div>
                     <span class="text-base font-semibold">Rotor: <span id="rotor-count" class="text-purple-400">3</span></span>
+                </div>
+                <div class="flex items-center gap-3">
+                    <div class="w-3 h-3 rounded-full bg-yellow-500"></div>
+                    <span class="text-base font-semibold">Suara: <span id="sound-status-text" class="text-yellow-400">ON</span></span>
                 </div>
             </div>
         </header>
@@ -1546,6 +1847,9 @@
                                   placeholder="Ketik pesan Anda di sini..."></textarea>
                         <div class="flex justify-between mt-2 text-sm text-gray-400">
                             <span>Jumlah Karakter: <span id="input-count">0</span></span>
+                            <button id="auto-encrypt" class="text-green-400 hover:text-green-300 text-sm">
+                                <i class="fas fa-robot mr-1"></i> Enkripsi Otomatis
+                            </button>
                         </div>
                     </div>
                     
@@ -1557,9 +1861,14 @@
                         </div>
                         <div class="flex justify-between mt-2 text-sm text-gray-400">
                             <span>Hasil: <span id="output-count">0</span> karakter</span>
-                            <button id="copy-output" class="text-blue-400 hover:text-blue-300">
-                                <i class="fas fa-copy mr-1"></i> Salin
-                            </button>
+                            <div class="space-x-2">
+                                <button id="copy-output" class="text-blue-400 hover:text-blue-300">
+                                    <i class="fas fa-copy mr-1"></i> Salin
+                                </button>
+                                <button id="speak-output" class="text-purple-400 hover:text-purple-300">
+                                    <i class="fas fa-volume-up mr-1"></i> Baca
+                                </button>
+                            </div>
                         </div>
                     </div>
                     
@@ -1614,11 +1923,31 @@
                             </span>
                         </h3>
                         <div class="flex gap-3">
-                            <button class="ukw-btn active px-5 py-3 bg-blue-700 rounded-lg font-bold" data-ukw="B">
-                                UKW-B
+                            <button class="ukw-btn enhanced active px-5 py-3 bg-blue-700 rounded-lg font-bold" data-ukw="B">
+                                <i class="fas fa-retweet mr-2"></i> UKW-B
                             </button>
-                            <button class="ukw-btn px-5 py-3 bg-gray-800 hover:bg-gray-700 rounded-lg font-bold" data-ukw="C">
-                                UKW-C
+                            <button class="ukw-btn enhanced px-5 py-3 bg-gray-800 hover:bg-gray-700 rounded-lg font-bold" data-ukw="C">
+                                <i class="fas fa-sync-alt mr-2"></i> UKW-C
+                            </button>
+                        </div>
+                        <div class="mt-2 text-sm text-gray-400">
+                            <i class="fas fa-info-circle mr-1"></i>
+                            UKW-B: Standar, UKW-C: Alternatif dengan wiring berbeda
+                        </div>
+                    </div>
+                    
+                    <!-- Sound Preview -->
+                    <div>
+                        <h3 class="text-xl font-semibold mb-4 text-blue-300">PRATINJAU SUARA</h3>
+                        <div class="flex flex-wrap gap-2">
+                            <button id="preview-tick" class="px-4 py-2 bg-gray-800 hover:bg-gray-700 rounded-lg">
+                                <i class="fas fa-play mr-2"></i> Suara Ketikan
+                            </button>
+                            <button id="preview-rotor" class="px-4 py-2 bg-gray-800 hover:bg-gray-700 rounded-lg">
+                                <i class="fas fa-cog mr-2"></i> Suara Rotor
+                            </button>
+                            <button id="preview-complete" class="px-4 py-2 bg-gray-800 hover:bg-gray-700 rounded-lg">
+                                <i class="fas fa-bolt mr-2"></i> Proses Lengkap
                             </button>
                         </div>
                     </div>
@@ -1643,9 +1972,9 @@
         <!-- Footer -->
         <footer class="mt-8 pt-6 border-t border-gray-800 text-center text-gray-400">
             <div class="mb-4">
-                <p class="text-lg font-semibold text-blue-300">MESIN ENIGMA SIMULATOR - VISUALISASI LENGKAP</p>
+                <p class="text-lg font-semibold text-blue-300">MESIN ENIGMA SIMULATOR PRO - VISUALISASI & SUARA LENGKAP</p>
                 <p class="text-sm">Dibuat dengan ❤️ oleh <span class="text-yellow-400 font-bold">Evan Fauzan</span></p>
-                <p class="text-sm mt-2">Visualisasi setiap langkah enkripsi untuk pemahaman yang lebih baik</p>
+                <p class="text-sm mt-2">Visualisasi setiap langkah enkripsi dengan umpan balik suara untuk pengalaman belajar yang lebih baik</p>
             </div>
             
             <div class="flex flex-wrap justify-center gap-4">
@@ -1655,11 +1984,15 @@
                 <button id="about-btn" class="px-4 py-2 bg-gray-800 hover:bg-gray-700 rounded-lg">
                     <i class="fas fa-info-circle mr-2"></i> Tentang
                 </button>
+                <button id="feedback-btn" class="px-4 py-2 bg-gray-800 hover:bg-gray-700 rounded-lg">
+                    <i class="fas fa-comment-dots mr-2"></i> Beri Masukan
+                </button>
             </div>
             
             <p class="mt-6 text-xs text-gray-500">
                 Simulator ini dibuat untuk tujuan pendidikan dan pembelajaran sejarah kriptografi.
                 Berdasarkan mesin Enigma yang digunakan pada Perang Dunia II.
+                Versi Pro dengan sistem suara dan visualisasi canggih.
             </p>
         </footer>
     </div>
@@ -1672,7 +2005,7 @@
     <!-- Notification Container -->
     <div id="notification-container"></div>
 
-    <!-- Enhanced Enigma Machine with Signal Path Tracking -->
+    <!-- Enhanced Enigma Machine with Sound System and UKW Improvements -->
     <script>
         class EnhancedEnigmaMachine {
             constructor() {
@@ -1726,7 +2059,9 @@
             setReflector(reflectorType) {
                 if (this.reflectorWirings[reflectorType]) {
                     this.reflector = reflectorType;
+                    return true;
                 }
+                return false;
             }
             
             addPlugboardConnection(a, b) {
@@ -1795,6 +2130,12 @@
                 if (rotateLeft) {
                     this.rotorPositions[0] = (this.rotorPositions[0] + 1) % 26;
                 }
+                
+                return {
+                    rotatedRight: true,
+                    rotatedMiddle: rotateMiddle,
+                    rotatedLeft: rotateLeft
+                };
             }
             
             applyRotorForward(letterIndex, rotorIndex) {
@@ -1841,10 +2182,8 @@
                     return {result: inputChar, path: []};
                 }
                 
-                // Reset signal path for this character
                 this.signalPath = [];
                 
-                // Add initial state
                 this.signalPath.push({
                     step: 0,
                     type: 'input',
@@ -1855,12 +2194,10 @@
                     position: null
                 });
                 
-                // Rotate rotors before processing
-                this.rotateRotors();
+                const rotationResult = this.rotateRotors();
                 
                 let signal = this.letterToIndex(char);
                 
-                // Plugboard in
                 const beforePlugboardIn = this.indexToLetter(signal);
                 signal = this.applyPlugboard(signal);
                 const afterPlugboardIn = this.indexToLetter(signal);
@@ -1877,7 +2214,6 @@
                     });
                 }
                 
-                // Forward through rotors (right to left)
                 let currentSignal = signal;
                 for (let i = 2; i >= 0; i--) {
                     const beforeRotor = this.indexToLetter(currentSignal);
@@ -1897,7 +2233,6 @@
                     });
                 }
                 
-                // Reflector
                 const beforeReflector = this.indexToLetter(currentSignal);
                 currentSignal = this.applyReflector(currentSignal);
                 const afterReflector = this.indexToLetter(currentSignal);
@@ -1912,7 +2247,6 @@
                     position: 'reflector'
                 });
                 
-                // Backward through rotors (left to right)
                 for (let i = 0; i < 3; i++) {
                     const beforeRotor = this.indexToLetter(currentSignal);
                     currentSignal = this.applyRotorBackward(currentSignal, i);
@@ -1931,7 +2265,6 @@
                     });
                 }
                 
-                // Plugboard out
                 const beforePlugboardOut = this.indexToLetter(currentSignal);
                 currentSignal = this.applyPlugboard(currentSignal);
                 const afterPlugboardOut = this.indexToLetter(currentSignal);
@@ -1948,7 +2281,6 @@
                     });
                 }
                 
-                // Final output
                 const result = this.indexToLetter(currentSignal);
                 this.signalPath.push({
                     step: this.signalPath.length,
@@ -1964,7 +2296,8 @@
                 
                 return {
                     result: result,
-                    path: this.signalPath
+                    path: this.signalPath,
+                    rotation: rotationResult
                 };
             }
             
@@ -2059,10 +2392,220 @@
             }
         }
 
-        // Enhanced UI Controller with All Features
+        // Sound System Manager
+        class SoundSystem {
+            constructor() {
+                this.sounds = {
+                    tick: null,
+                    rotor: null,
+                    click: null,
+                    success: null,
+                    error: null
+                };
+                
+                this.audioContext = null;
+                this.volume = 0.7;
+                this.enabled = true;
+                this.soundType = 'typewriter';
+                
+                this.init();
+            }
+            
+            init() {
+                try {
+                    this.audioContext = new (window.AudioContext || window.webkitAudioContext)();
+                    
+                    this.loadDefaultSounds();
+                    this.loadFromLocalStorage();
+                    
+                    console.log('Sound system initialized');
+                } catch (e) {
+                    console.warn('Web Audio API not supported, using fallback', e);
+                    this.enabled = false;
+                }
+            }
+            
+            loadDefaultSounds() {
+                this.createTickSound();
+                this.createRotorSound();
+                this.createClickSound();
+            }
+            
+            createTickSound() {
+                if (!this.audioContext) return;
+                
+                try {
+                    const oscillator = this.audioContext.createOscillator();
+                    const gainNode = this.audioContext.createGain();
+                    
+                    oscillator.connect(gainNode);
+                    gainNode.connect(this.audioContext.destination);
+                    
+                    oscillator.frequency.value = 800;
+                    oscillator.type = 'sine';
+                    
+                    gainNode.gain.setValueAtTime(0, this.audioContext.currentTime);
+                    gainNode.gain.linearRampToValueAtTime(this.volume * 0.3, this.audioContext.currentTime + 0.01);
+                    gainNode.gain.exponentialRampToValueAtTime(0.001, this.audioContext.currentTime + 0.1);
+                    
+                    oscillator.start(this.audioContext.currentTime);
+                    oscillator.stop(this.audioContext.currentTime + 0.1);
+                    
+                    this.sounds.tick = { oscillator, gainNode };
+                } catch (e) {
+                    console.warn('Failed to create tick sound:', e);
+                }
+            }
+            
+            createRotorSound() {
+                if (!this.audioContext) return;
+                
+                try {
+                    const oscillator = this.audioContext.createOscillator();
+                    const gainNode = this.audioContext.createGain();
+                    
+                    oscillator.connect(gainNode);
+                    gainNode.connect(this.audioContext.destination);
+                    
+                    oscillator.frequency.value = 400;
+                    oscillator.type = 'sawtooth';
+                    
+                    gainNode.gain.setValueAtTime(0, this.audioContext.currentTime);
+                    gainNode.gain.linearRampToValueAtTime(this.volume * 0.2, this.audioContext.currentTime + 0.05);
+                    gainNode.gain.exponentialRampToValueAtTime(0.001, this.audioContext.currentTime + 0.3);
+                    
+                    oscillator.start(this.audioContext.currentTime);
+                    oscillator.stop(this.audioContext.currentTime + 0.3);
+                    
+                    this.sounds.rotor = { oscillator, gainNode };
+                } catch (e) {
+                    console.warn('Failed to create rotor sound:', e);
+                }
+            }
+            
+            createClickSound() {
+                if (!this.audioContext) return;
+                
+                try {
+                    const oscillator = this.audioContext.createOscillator();
+                    const gainNode = this.audioContext.createGain();
+                    
+                    oscillator.connect(gainNode);
+                    gainNode.connect(this.audioContext.destination);
+                    
+                    oscillator.frequency.value = 1200;
+                    oscillator.type = 'square';
+                    
+                    gainNode.gain.setValueAtTime(0, this.audioContext.currentTime);
+                    gainNode.gain.linearRampToValueAtTime(this.volume * 0.1, this.audioContext.currentTime + 0.01);
+                    gainNode.gain.exponentialRampToValueAtTime(0.001, this.audioContext.currentTime + 0.05);
+                    
+                    oscillator.start(this.audioContext.currentTime);
+                    oscillator.stop(this.audioContext.currentTime + 0.05);
+                    
+                    this.sounds.click = { oscillator, gainNode };
+                } catch (e) {
+                    console.warn('Failed to create click sound:', e);
+                }
+            }
+            
+            playTick() {
+                if (!this.enabled || !this.audioContext) return;
+                
+                try {
+                    this.createTickSound();
+                } catch (e) {
+                    console.warn('Failed to play tick sound:', e);
+                }
+            }
+            
+            playRotor() {
+                if (!this.enabled || !this.audioContext) return;
+                
+                try {
+                    this.createRotorSound();
+                } catch (e) {
+                    console.warn('Failed to play rotor sound:', e);
+                }
+            }
+            
+            playClick() {
+                if (!this.enabled || !this.audioContext) return;
+                
+                try {
+                    this.createClickSound();
+                } catch (e) {
+                    console.warn('Failed to play click sound:', e);
+                }
+            }
+            
+            setVolume(volume) {
+                this.volume = Math.max(0, Math.min(1, volume / 100));
+                this.saveToLocalStorage();
+            }
+            
+            toggle() {
+                this.enabled = !this.enabled;
+                this.saveToLocalStorage();
+                return this.enabled;
+            }
+            
+            setSoundType(type) {
+                this.soundType = type;
+                this.saveToLocalStorage();
+            }
+            
+            loadFromLocalStorage() {
+                try {
+                    const saved = localStorage.getItem('enigma_sound_settings');
+                    if (saved) {
+                        const settings = JSON.parse(saved);
+                        this.enabled = settings.enabled !== false;
+                        this.volume = settings.volume || 0.7;
+                        this.soundType = settings.soundType || 'typewriter';
+                    }
+                } catch (e) {
+                    console.warn('Failed to load sound settings:', e);
+                }
+            }
+            
+            saveToLocalStorage() {
+                try {
+                    const settings = {
+                        enabled: this.enabled,
+                        volume: this.volume,
+                        soundType: this.soundType
+                    };
+                    localStorage.setItem('enigma_sound_settings', JSON.stringify(settings));
+                } catch (e) {
+                    console.warn('Failed to save sound settings:', e);
+                }
+            }
+            
+            playKeySound() {
+                if (!this.enabled) return;
+                
+                switch(this.soundType) {
+                    case 'typewriter':
+                        this.playTick();
+                        break;
+                    case 'mechanical':
+                        this.playRotor();
+                        break;
+                    case 'electronic':
+                        this.playClick();
+                        break;
+                    default:
+                        this.playTick();
+                }
+            }
+        }
+
+        // Enhanced UI Controller with Sound System
         class EnhancedEnigmaUIController {
             constructor() {
                 this.enigma = new EnhancedEnigmaMachine();
+                this.soundSystem = new SoundSystem();
                 this.currentMode = 'encrypt';
                 this.history = [];
                 this.tutorialActive = false;
@@ -2075,12 +2618,17 @@
                 this.darkMode = true;
                 this.voiceGuideSteps = [];
                 this.currentVoiceStep = 0;
+                this.hapticFeedback = true;
+                this.autoRotate = true;
+                this.animationStyle = 'smooth';
                 
                 this.initializeUI();
                 this.bindEvents();
                 this.updateUI();
                 this.initializeVoiceGuide();
                 this.showWelcomeMessage();
+                
+                this.initializeAdvancedSettings();
             }
             
             initializeUI() {
@@ -2089,6 +2637,35 @@
                 this.initializeRotorSettings();
                 this.initializeRotorDisplays();
                 this.updatePlugboardDisplay();
+                this.updateSoundUI();
+                this.updateAdvancedUI();
+            }
+            
+            initializeAdvancedSettings() {
+                const savedSettings = localStorage.getItem('enigma_advanced_settings');
+                if (savedSettings) {
+                    try {
+                        const settings = JSON.parse(savedSettings);
+                        this.hapticFeedback = settings.hapticFeedback !== false;
+                        this.autoRotate = settings.autoRotate !== false;
+                        this.animationStyle = settings.animationStyle || 'smooth';
+                    } catch (e) {
+                        console.warn('Failed to load advanced settings:', e);
+                    }
+                }
+            }
+            
+            saveAdvancedSettings() {
+                try {
+                    const settings = {
+                        hapticFeedback: this.hapticFeedback,
+                        autoRotate: this.autoRotate,
+                        animationStyle: this.animationStyle
+                    };
+                    localStorage.setItem('enigma_advanced_settings', JSON.stringify(settings));
+                } catch (e) {
+                    console.warn('Failed to save advanced settings:', e);
+                }
             }
             
             bindEvents() {
@@ -2121,13 +2698,26 @@
                 document.getElementById('encrypt-mode').addEventListener('click', () => this.setMode('encrypt'));
                 document.getElementById('decrypt-mode').addEventListener('click', () => this.setMode('decrypt'));
                 
-                // UKW buttons
+                // UKW buttons - IMPROVED
                 document.querySelectorAll('.ukw-btn').forEach(btn => {
-                    btn.addEventListener('click', () => {
+                    btn.addEventListener('click', (e) => {
+                        const ukwType = e.currentTarget.dataset.ukw;
+                        this.playSound('click');
+                        
                         document.querySelectorAll('.ukw-btn').forEach(b => b.classList.remove('active'));
-                        btn.classList.add('active');
-                        this.enigma.setReflector(btn.dataset.ukw);
-                        this.updateUI();
+                        e.currentTarget.classList.add('active');
+                        
+                        const success = this.enigma.setReflector(ukwType);
+                        if (success) {
+                            this.updateUI();
+                            this.showNotification(`Reflektor diubah ke UKW-${ukwType}`, 'success');
+                            
+                            // Add visual feedback
+                            e.currentTarget.classList.add('haptic');
+                            setTimeout(() => {
+                                e.currentTarget.classList.remove('haptic');
+                            }, 100);
+                        }
                     });
                 });
                 
@@ -2144,6 +2734,8 @@
                 // Text processing
                 document.getElementById('process-text').addEventListener('click', () => this.processText());
                 document.getElementById('copy-output').addEventListener('click', () => this.copyOutput());
+                document.getElementById('speak-output').addEventListener('click', () => this.speakOutput());
+                document.getElementById('auto-encrypt').addEventListener('click', () => this.autoEncrypt());
                 document.getElementById('clear-all').addEventListener('click', () => this.clearAll());
                 document.getElementById('clear-history').addEventListener('click', () => this.clearHistory());
                 
@@ -2155,6 +2747,7 @@
                 // Help and About buttons
                 document.getElementById('help-btn').addEventListener('click', () => this.showHelp());
                 document.getElementById('about-btn').addEventListener('click', () => this.showAbout());
+                document.getElementById('feedback-btn').addEventListener('click', () => this.showFeedback());
                 
                 // Speed control
                 document.querySelectorAll('.speed-option[data-speed]').forEach(btn => {
@@ -2164,6 +2757,16 @@
                 // Visualization mode
                 document.querySelectorAll('.speed-option[data-mode]').forEach(btn => {
                     btn.addEventListener('click', (e) => this.setVisualizationMode(e.target.dataset.mode));
+                });
+                
+                // Sound type
+                document.querySelectorAll('.speed-option[data-sound]').forEach(btn => {
+                    btn.addEventListener('click', (e) => this.setSoundType(e.target.dataset.sound));
+                });
+                
+                // Animation style
+                document.querySelectorAll('.speed-option[data-animation]').forEach(btn => {
+                    btn.addEventListener('click', (e) => this.setAnimationStyle(e.target.dataset.animation));
                 });
                 
                 // Theme toggle
@@ -2181,10 +2784,54 @@
                 // Dark/light toggle
                 document.getElementById('dark-light-toggle').addEventListener('click', () => this.toggleDarkLight());
                 
+                // Sound toggle
+                document.getElementById('sound-toggle').addEventListener('click', () => this.toggleSound());
+                document.getElementById('volume-control-btn').addEventListener('click', () => {
+                    document.getElementById('sound-panel').classList.toggle('active');
+                });
+                
+                // Volume control
+                document.getElementById('volume-slider').addEventListener('input', (e) => {
+                    const volume = e.target.value;
+                    this.setVolume(volume);
+                    document.getElementById('volume-value').textContent = volume + '%';
+                });
+                
+                // Advanced settings toggle
+                document.getElementById('advanced-toggle').addEventListener('click', () => {
+                    document.getElementById('advanced-panel').classList.toggle('active');
+                });
+                
+                // Advanced settings
+                document.getElementById('haptic-toggle').addEventListener('change', (e) => {
+                    this.hapticFeedback = e.target.checked;
+                    this.saveAdvancedSettings();
+                    this.showNotification(`Umpan balik haptic ${this.hapticFeedback ? 'diaktifkan' : 'dinonaktifkan'}`, 'info');
+                });
+                
+                document.getElementById('autorotate-toggle').addEventListener('change', (e) => {
+                    this.autoRotate = e.target.checked;
+                    this.saveAdvancedSettings();
+                    this.showNotification(`Auto-rotate ${this.autoRotate ? 'diaktifkan' : 'dinonaktifkan'}`, 'info');
+                });
+                
+                document.getElementById('export-settings').addEventListener('click', () => this.exportAllSettings());
+                
+                // Sound preview buttons
+                document.getElementById('preview-tick').addEventListener('click', () => this.playSound('tick'));
+                document.getElementById('preview-rotor').addEventListener('click', () => this.playSound('rotor'));
+                document.getElementById('preview-complete').addEventListener('click', () => this.previewCompleteSound());
+                
                 // Close theme panel when clicking outside
                 document.addEventListener('click', (e) => {
                     if (!e.target.closest('.theme-selector')) {
                         document.getElementById('theme-panel').classList.remove('active');
+                    }
+                    if (!e.target.closest('.sound-control')) {
+                        document.getElementById('sound-panel').classList.remove('active');
+                    }
+                    if (!e.target.closest('.advanced-settings')) {
+                        document.getElementById('advanced-panel').classList.remove('active');
                     }
                 });
                 
@@ -2244,11 +2891,12 @@
                 
                 lampLayout.forEach(letter => {
                     const lamp = document.createElement('div');
-                    lamp.className = 'lamp';
+                    lamp.className = 'lamp performance-optimized';
                     lamp.id = `lamp-${letter}`;
                     lamp.textContent = letter;
                     lamp.addEventListener('click', () => {
                         this.showNotification(`Lampu ${letter} menunjukkan hasil enkripsi`, 'info');
+                        this.playSound('click');
                     });
                     lampboard.appendChild(lamp);
                 });
@@ -2264,11 +2912,26 @@
                 
                 keyLayout.forEach(letter => {
                     const key = document.createElement('div');
-                    key.className = 'key';
+                    key.className = 'key performance-optimized';
                     key.id = `key-${letter}`;
                     key.textContent = letter;
                     key.dataset.letter = letter;
-                    key.addEventListener('click', () => this.handleKeyPress(letter));
+                    key.addEventListener('click', () => {
+                        this.handleKeyPress(letter);
+                        if (this.hapticFeedback) {
+                            key.classList.add('haptic');
+                            setTimeout(() => key.classList.remove('haptic'), 100);
+                        }
+                    });
+                    key.addEventListener('mousedown', () => {
+                        key.classList.add('pressed');
+                    });
+                    key.addEventListener('mouseup', () => {
+                        setTimeout(() => key.classList.remove('pressed'), 300);
+                    });
+                    key.addEventListener('mouseleave', () => {
+                        key.classList.remove('pressed');
+                    });
                     keyboard.appendChild(key);
                 });
             }
@@ -2289,7 +2952,6 @@
                     label.textContent = rotorLabels[i];
                     rotorDiv.appendChild(label);
                     
-                    // Rotor type
                     const typeDiv = document.createElement('div');
                     const typeLabel = document.createElement('label');
                     typeLabel.className = 'block text-gray-300 mb-1';
@@ -2311,11 +2973,11 @@
                     typeSelect.addEventListener('change', () => {
                         this.enigma.rotors[i] = typeSelect.value;
                         this.updateRotorDisplays();
+                        this.playSound('click');
                     });
                     typeDiv.appendChild(typeSelect);
                     rotorDiv.appendChild(typeDiv);
                     
-                    // Position
                     const posDiv = document.createElement('div');
                     const posLabel = document.createElement('label');
                     posLabel.className = 'block text-gray-300 mb-1';
@@ -2338,11 +3000,11 @@
                     posSelect.addEventListener('change', () => {
                         this.enigma.rotorPositions[i] = parseInt(posSelect.value);
                         this.updateRotorDisplays();
+                        this.playSound('click');
                     });
                     posDiv.appendChild(posSelect);
                     rotorDiv.appendChild(posDiv);
                     
-                    // Ring setting
                     const ringDiv = document.createElement('div');
                     const ringLabel = document.createElement('label');
                     ringLabel.className = 'block text-gray-300 mb-1';
@@ -2364,6 +3026,7 @@
                     ringSelect.value = this.enigma.ringSettings[i];
                     ringSelect.addEventListener('change', () => {
                         this.enigma.ringSettings[i] = parseInt(ringSelect.value);
+                        this.playSound('click');
                     });
                     ringDiv.appendChild(ringSelect);
                     rotorDiv.appendChild(ringDiv);
@@ -2383,7 +3046,7 @@
                     rotorDiv.className = 'rotor-step';
                     
                     const displayDiv = document.createElement('div');
-                    displayDiv.className = 'rotor-display';
+                    displayDiv.className = 'rotor-display performance-optimized';
                     displayDiv.id = `rotor-display-${i}`;
                     displayDiv.textContent = this.enigma.indexToLetter(this.enigma.rotorPositions[i]);
                     rotorDiv.appendChild(displayDiv);
@@ -2453,6 +3116,7 @@
                         removeBtn.addEventListener('click', () => {
                             this.enigma.removePlugboardConnection(pair[0]);
                             this.updatePlugboardDisplay();
+                            this.playSound('click');
                         });
                         pairDiv.appendChild(removeBtn);
                         
@@ -2463,12 +3127,64 @@
                 document.getElementById('plugboard-count').textContent = pairs.length;
             }
             
+            updateSoundUI() {
+                const soundBtn = document.getElementById('sound-toggle');
+                const soundIcon = document.getElementById('sound-icon');
+                const soundStatus = document.getElementById('sound-status-text');
+                
+                if (this.soundSystem.enabled) {
+                    soundBtn.classList.add('active');
+                    soundIcon.className = 'fas fa-volume-up';
+                    soundStatus.textContent = 'ON';
+                    soundStatus.className = 'text-green-400';
+                } else {
+                    soundBtn.classList.remove('active');
+                    soundIcon.className = 'fas fa-volume-mute';
+                    soundStatus.textContent = 'OFF';
+                    soundStatus.className = 'text-red-400';
+                }
+                
+                // Update sound type buttons
+                document.querySelectorAll('.speed-option[data-sound]').forEach(btn => {
+                    btn.classList.remove('active');
+                    if (btn.dataset.sound === this.soundSystem.soundType) {
+                        btn.classList.add('active');
+                    }
+                });
+                
+                // Update volume slider
+                const volumeSlider = document.getElementById('volume-slider');
+                const volumeValue = document.getElementById('volume-value');
+                if (volumeSlider && volumeValue) {
+                    volumeSlider.value = this.soundSystem.volume * 100;
+                    volumeValue.textContent = Math.round(this.soundSystem.volume * 100) + '%';
+                }
+            }
+            
+            updateAdvancedUI() {
+                const hapticToggle = document.getElementById('haptic-toggle');
+                const autorotateToggle = document.getElementById('autorotate-toggle');
+                
+                if (hapticToggle) hapticToggle.checked = this.hapticFeedback;
+                if (autorotateToggle) autorotateToggle.checked = this.autoRotate;
+                
+                // Update animation style buttons
+                document.querySelectorAll('.speed-option[data-animation]').forEach(btn => {
+                    btn.classList.remove('active');
+                    if (btn.dataset.animation === this.animationStyle) {
+                        btn.classList.add('active');
+                    }
+                });
+            }
+            
             setMode(mode) {
                 this.currentMode = mode;
-                document.getElementById('current-mode').textContent = mode === 'encrypt' ? 'Enkripsi' : 'Dekripsi';
+                document.getElementById('current-mode').textContent = mode === 'encrypt' ? 'ENKRIPSI' : 'DEKRIPSI';
                 
                 document.querySelectorAll('.mode-btn').forEach(btn => btn.classList.remove('active'));
                 document.getElementById(`${mode}-mode`).classList.add('active');
+                
+                this.playSound('click');
             }
             
             setAnimationSpeed(speed) {
@@ -2477,6 +3193,7 @@
                 buttons.forEach(btn => btn.classList.remove('active'));
                 event.target.classList.add('active');
                 this.showNotification(`Kecepatan animasi diatur ke ${speed === 0 ? 'instan' : speed + 'ms'}`, 'info');
+                this.playSound('click');
             }
             
             setVisualizationMode(mode) {
@@ -2491,6 +3208,68 @@
                     'none': 'Nonaktif'
                 };
                 this.showNotification(`Mode visualisasi: ${modes[mode]}`, 'info');
+                this.playSound('click');
+            }
+            
+            setSoundType(type) {
+                this.soundSystem.setSoundType(type);
+                const buttons = document.querySelectorAll('.speed-option[data-sound]');
+                buttons.forEach(btn => btn.classList.remove('active'));
+                event.target.classList.add('active');
+                
+                const types = {
+                    'typewriter': 'Mesin Ketik',
+                    'mechanical': 'Mekanikal',
+                    'electronic': 'Elektronik'
+                };
+                this.showNotification(`Jenis suara: ${types[type]}`, 'info');
+                this.playSound('tick');
+            }
+            
+            setAnimationStyle(style) {
+                this.animationStyle = style;
+                const buttons = document.querySelectorAll('.speed-option[data-animation]');
+                buttons.forEach(btn => btn.classList.remove('active'));
+                event.target.classList.add('active');
+                
+                const styles = {
+                    'smooth': 'Halus',
+                    'fast': 'Cepat',
+                    'minimal': 'Minimal'
+                };
+                this.showNotification(`Style animasi: ${styles[style]}`, 'info');
+                this.playSound('click');
+            }
+            
+            setVolume(volume) {
+                this.soundSystem.setVolume(volume);
+                this.playSound('tick');
+            }
+            
+            toggleSound() {
+                const enabled = this.soundSystem.toggle();
+                this.updateSoundUI();
+                this.showNotification(`Suara ${enabled ? 'diaktifkan' : 'dinonaktifkan'}`, enabled ? 'success' : 'info');
+                
+                if (enabled) {
+                    this.playSound('tick');
+                }
+            }
+            
+            playSound(type) {
+                switch(type) {
+                    case 'tick':
+                        this.soundSystem.playTick();
+                        break;
+                    case 'rotor':
+                        this.soundSystem.playRotor();
+                        break;
+                    case 'click':
+                        this.soundSystem.playClick();
+                        break;
+                    default:
+                        this.soundSystem.playKeySound();
+                }
             }
             
             setTheme(theme) {
@@ -2498,7 +3277,6 @@
                 document.body.classList.remove('glassmorphism', 'aurora', 'modern', 'flat', 'neumorphism');
                 document.body.classList.add(theme);
                 
-                // Update active theme button
                 document.querySelectorAll('.theme-option').forEach(btn => {
                     btn.classList.remove('active');
                     if (btn.dataset.theme === theme) {
@@ -2507,6 +3285,7 @@
                 });
                 
                 this.showNotification(`Tema diubah ke: ${theme.charAt(0).toUpperCase() + theme.slice(1)}`, 'success');
+                this.playSound('click');
             }
             
             toggleDarkLight() {
@@ -2518,6 +3297,7 @@
                 icon.className = this.darkMode ? 'fas fa-moon' : 'fas fa-sun';
                 
                 this.showNotification(`Mode ${this.darkMode ? 'gelap' : 'terang'} diaktifkan`, 'success');
+                this.playSound('click');
             }
             
             toggleQuickVisualization() {
@@ -2535,11 +3315,15 @@
                     btn.classList.add('bg-blue-600');
                     this.showNotification('Visualisasi cepat dinonaktifkan', 'info');
                 }
+                this.playSound('click');
             }
             
             async handleKeyPress(key) {
                 if (this.isAnimating) return;
                 this.isAnimating = true;
+                
+                // Play sound
+                this.playSound('tick');
                 
                 // Visual feedback on keyboard
                 if (key !== ' ') {
@@ -2547,11 +3331,21 @@
                     if (keyElement) {
                         keyElement.classList.add('pressed');
                         setTimeout(() => keyElement.classList.remove('pressed'), 300);
+                        
+                        if (this.hapticFeedback) {
+                            keyElement.classList.add('haptic');
+                            setTimeout(() => keyElement.classList.remove('haptic'), 100);
+                        }
                     }
                 }
                 
                 // Process the character with path tracking
-                const {result, path} = this.enigma.processCharacterWithPath(key);
+                const {result, path, rotation} = this.enigma.processCharacterWithPath(key);
+                
+                // Play rotor sound if rotated
+                if (rotation.rotatedMiddle || rotation.rotatedLeft) {
+                    setTimeout(() => this.playSound('rotor'), 100);
+                }
                 
                 // Show visualization based on mode
                 if (this.visualizationMode !== 'none') {
@@ -2611,10 +3405,8 @@
                     quickViz.appendChild(vizContainer);
                 }
                 
-                // Clear old signals
                 vizContainer.innerHTML = '';
                 
-                // Show only key steps
                 const keySteps = path.filter(step => 
                     ['input', 'plugboard_in', 'rotor_forward', 'reflector', 'rotor_backward', 'output'].includes(step.type)
                 );
@@ -2625,7 +3417,6 @@
                     node.textContent = step.letter;
                     node.title = step.description;
                     
-                    // Color based on step type
                     if (step.type === 'input') node.style.background = 'radial-gradient(circle, #00ff9d 30%, transparent 70%)';
                     else if (step.type === 'output') node.style.background = 'radial-gradient(circle, #ff3838 30%, transparent 70%)';
                     else if (step.type.includes('rotor')) node.style.background = 'radial-gradient(circle, #00a8ff 30%, transparent 70%)';
@@ -2634,13 +3425,11 @@
                     
                     vizContainer.appendChild(node);
                     
-                    // Add delay if not instant
                     if (this.animationSpeed > 0) {
                         await this.sleep(this.animationSpeed / 3);
                     }
                 }
                 
-                // Auto-hide after delay
                 setTimeout(() => {
                     vizContainer.innerHTML = '';
                 }, 2000);
@@ -2648,28 +3437,22 @@
             
             async showStepByStepVisualization(path) {
                 if (this.animationSpeed === 0) {
-                    // Skip animation for instant mode
                     return;
                 }
                 
-                // Show the visualization panel
                 const stepPanel = document.getElementById('step-visualization');
                 stepPanel.style.display = 'block';
                 
-                // Clear previous steps
                 const stepContainer = document.getElementById('step-container');
                 stepContainer.innerHTML = '';
                 
-                // Create steps for each path item
                 for (let i = 0; i < path.length; i++) {
                     const step = path[i];
                     
-                    // Create step element
                     const stepElement = document.createElement('div');
                     stepElement.className = 'step';
                     stepElement.id = `step-${i}`;
                     
-                    // Determine icon based on step type
                     let icon = 'fa-keyboard';
                     if (step.type.includes('plugboard')) icon = 'fa-exchange-alt';
                     if (step.type.includes('rotor')) icon = 'fa-cog';
@@ -2686,7 +3469,6 @@
                     
                     stepContainer.appendChild(stepElement);
                     
-                    // Add arrow between steps (except for the last one)
                     if (i < path.length - 1) {
                         const arrow = document.createElement('div');
                         arrow.className = 'step-arrow';
@@ -2694,23 +3476,17 @@
                         stepContainer.appendChild(arrow);
                     }
                     
-                    // Show signal animation for this step
                     await this.animateSignalStep(step, i);
                     
-                    // Highlight current step
                     stepElement.classList.add('active');
                     
-                    // Update description
                     document.getElementById('step-description').textContent = step.description;
                     
-                    // Wait before next step
                     await this.sleep(this.animationSpeed > 0 ? this.animationSpeed : 300);
                 }
                 
-                // Hide panel after a delay
                 setTimeout(() => {
                     stepPanel.style.display = 'none';
-                    // Clear active classes
                     document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
                 }, 3000);
             }
@@ -2718,13 +3494,12 @@
             async animateSignalStep(step, stepIndex) {
                 const visualization = document.getElementById('signal-visualization');
                 
-                // Determine position based on step type
                 let x, y;
                 const width = window.innerWidth;
                 const height = window.innerHeight;
                 
                 switch(step.position) {
-                    case null: // Input
+                    case null:
                         x = width * 0.5;
                         y = height * 0.8;
                         break;
@@ -2769,7 +3544,6 @@
                         y = height * 0.5;
                 }
                 
-                // Create signal node
                 const signalNode = document.createElement('div');
                 signalNode.className = 'signal-node';
                 signalNode.textContent = step.letter;
@@ -2777,7 +3551,6 @@
                 signalNode.style.top = `${y - 30}px`;
                 visualization.appendChild(signalNode);
                 
-                // Create info box
                 const infoBox = document.createElement('div');
                 infoBox.className = 'signal-info';
                 infoBox.textContent = step.description;
@@ -2785,13 +3558,11 @@
                 infoBox.style.top = `${y - 20}px`;
                 visualization.appendChild(infoBox);
                 
-                // Remove elements after animation
                 setTimeout(() => {
                     signalNode.remove();
                     infoBox.remove();
                 }, 2000);
                 
-                // Wait for animation
                 await this.sleep(this.animationSpeed > 0 ? this.animationSpeed / 2 : 400);
             }
             
@@ -2809,6 +3580,8 @@
                     
                     document.getElementById('output-count').textContent = outputText.textContent.length;
                     document.getElementById('input-count').textContent = inputText.value.replace(/[^A-Za-z]/g, '').length;
+                    
+                    this.playSound('click');
                 }
             }
             
@@ -2821,7 +3594,8 @@
                     return;
                 }
                 
-                // Reset rotor positions to current settings
+                this.playSound('tick');
+                
                 for (let i = 0; i < 3; i++) {
                     const posSelect = document.getElementById(`rotor-pos-${i}`);
                     if (posSelect) {
@@ -2834,17 +3608,15 @@
                 
                 result = this.enigma.processString(input);
                 
-                // Update output
                 outputText.innerHTML = `<span class="text-green-400">${result}</span>`;
                 
-                // Add to history
                 this.addToHistory(input, result);
                 
-                // Update counts
                 document.getElementById('char-count').textContent = this.enigma.charactersProcessed;
                 document.getElementById('output-count').textContent = result.length;
                 
                 this.showNotification(`Pesan diproses! (${result.length} karakter)`, 'success');
+                this.playSound('rotor');
             }
             
             addToHistory(input, output) {
@@ -2883,6 +3655,7 @@
                         document.getElementById('input-text').value = item.fullInput;
                         document.getElementById('output-text').innerHTML = `<span class="text-green-400">${item.fullOutput}</span>`;
                         this.showNotification('Riwayat dimuat', 'info');
+                        this.playSound('click');
                     });
                     
                     const time = document.createElement('div');
@@ -2908,6 +3681,7 @@
                 this.history = [];
                 this.updateHistoryPreview();
                 this.showNotification('Riwayat dihapus', 'success');
+                this.playSound('click');
             }
             
             addPlugboardConnection() {
@@ -2930,6 +3704,7 @@
                     this.updatePlugboardDisplay();
                     input.value = '';
                     this.showNotification(`Plugboard: ${value[0]} ↔ ${value[1]}`, 'success');
+                    this.playSound('click');
                 } else {
                     this.showNotification('Gagal menambahkan koneksi', 'error');
                 }
@@ -2939,34 +3714,61 @@
                 this.enigma.clearPlugboard();
                 this.updatePlugboardDisplay();
                 this.showNotification('Plugboard dikosongkan', 'success');
+                this.playSound('click');
             }
             
             randomizeSettings() {
                 this.enigma.generateRandomSettings();
                 this.updateUI();
                 this.showNotification('Pengaturan acak diterapkan', 'success');
+                this.playSound('rotor');
             }
             
             resetSettings() {
                 this.enigma.reset();
                 this.updateUI();
                 this.showNotification('Pengaturan direset', 'success');
+                this.playSound('click');
             }
             
             saveSettings() {
                 const settings = this.enigma.getSettings();
-                const settingsStr = JSON.stringify(settings, null, 2);
+                const soundSettings = {
+                    enabled: this.soundSystem.enabled,
+                    volume: this.soundSystem.volume,
+                    soundType: this.soundSystem.soundType
+                };
+                const advancedSettings = {
+                    hapticFeedback: this.hapticFeedback,
+                    autoRotate: this.autoRotate,
+                    animationStyle: this.animationStyle
+                };
+                
+                const allSettings = {
+                    enigma: settings,
+                    sound: soundSettings,
+                    advanced: advancedSettings,
+                    theme: this.currentTheme,
+                    darkMode: this.darkMode
+                };
+                
+                const settingsStr = JSON.stringify(allSettings, null, 2);
                 const blob = new Blob([settingsStr], {type: 'application/json'});
                 const url = URL.createObjectURL(blob);
                 const a = document.createElement('a');
                 a.href = url;
-                a.download = `enigma-pengaturan-${new Date().toISOString().slice(0,10)}.json`;
+                a.download = `enigma-pengaturan-lengkap-${new Date().toISOString().slice(0,10)}.json`;
                 document.body.appendChild(a);
                 a.click();
                 document.body.removeChild(a);
                 URL.revokeObjectURL(url);
                 
-                this.showNotification('Pengaturan disimpan', 'success');
+                this.showNotification('Semua pengaturan disimpan', 'success');
+                this.playSound('click');
+            }
+            
+            exportAllSettings() {
+                this.saveSettings();
             }
             
             loadSettings() {
@@ -2981,10 +3783,43 @@
                     const reader = new FileReader();
                     reader.onload = (event) => {
                         try {
-                            const settings = JSON.parse(event.target.result);
-                            this.enigma.applySettings(settings);
+                            const allSettings = JSON.parse(event.target.result);
+                            
+                            if (allSettings.enigma) {
+                                this.enigma.applySettings(allSettings.enigma);
+                            }
+                            
+                            if (allSettings.sound) {
+                                this.soundSystem.enabled = allSettings.sound.enabled !== false;
+                                this.soundSystem.volume = allSettings.sound.volume || 0.7;
+                                this.soundSystem.soundType = allSettings.sound.soundType || 'typewriter';
+                                this.soundSystem.saveToLocalStorage();
+                            }
+                            
+                            if (allSettings.advanced) {
+                                this.hapticFeedback = allSettings.advanced.hapticFeedback !== false;
+                                this.autoRotate = allSettings.advanced.autoRotate !== false;
+                                this.animationStyle = allSettings.advanced.animationStyle || 'smooth';
+                                this.saveAdvancedSettings();
+                            }
+                            
+                            if (allSettings.theme) {
+                                this.setTheme(allSettings.theme);
+                            }
+                            
+                            if (allSettings.darkMode !== undefined) {
+                                this.darkMode = allSettings.darkMode;
+                                document.body.classList.toggle('dark-mode', this.darkMode);
+                                document.body.classList.toggle('light-mode', !this.darkMode);
+                                const icon = document.querySelector('#dark-light-toggle i');
+                                icon.className = this.darkMode ? 'fas fa-moon' : 'fas fa-sun';
+                            }
+                            
                             this.updateUI();
-                            this.showNotification('Pengaturan dimuat', 'success');
+                            this.updateSoundUI();
+                            this.updateAdvancedUI();
+                            this.showNotification('Semua pengaturan dimuat', 'success');
+                            this.playSound('click');
                         } catch (err) {
                             this.showNotification('File pengaturan tidak valid', 'error');
                         }
@@ -3006,7 +3841,50 @@
                 
                 navigator.clipboard.writeText(text).then(() => {
                     this.showNotification('Hasil disalin ke clipboard', 'success');
+                    this.playSound('click');
                 });
+            }
+            
+            speakOutput() {
+                const outputText = document.getElementById('output-text');
+                const text = outputText.textContent;
+                
+                if (!text || text.includes('Hasil enkripsi')) {
+                    this.showNotification('Tidak ada hasil untuk dibaca', 'error');
+                    return;
+                }
+                
+                if ('speechSynthesis' in window) {
+                    const utterance = new SpeechSynthesisUtterance(text);
+                    utterance.lang = 'id-ID';
+                    utterance.rate = 0.8;
+                    speechSynthesis.speak(utterance);
+                    this.showNotification('Membaca hasil...', 'info');
+                } else {
+                    this.showNotification('Browser tidak mendukung text-to-speech', 'error');
+                }
+            }
+            
+            autoEncrypt() {
+                const sampleTexts = [
+                    "SERPONGUTARA",
+                    "HELLOWORLD",
+                    "ENIGMAMACHINE",
+                    "KRIPTOGRAFI",
+                    "INDONESIA",
+                    "BELAJARENKRIPSI",
+                    "PESANRAHASIA",
+                    "KEAMANANDATA",
+                    "VISUALISASI",
+                    "SIMULATORENIGMA"
+                ];
+                
+                const randomText = sampleTexts[Math.floor(Math.random() * sampleTexts.length)];
+                document.getElementById('input-text').value = randomText;
+                document.getElementById('input-count').textContent = randomText.length;
+                
+                this.showNotification(`Teks contoh "${randomText}" dimuat`, 'info');
+                this.playSound('click');
             }
             
             clearAll() {
@@ -3015,6 +3893,7 @@
                 document.getElementById('input-count').textContent = '0';
                 document.getElementById('output-count').textContent = '0';
                 this.showNotification('Semua dibersihkan', 'success');
+                this.playSound('click');
             }
             
             showTutorial() {
@@ -3023,11 +3902,13 @@
                 document.getElementById('tutorial-overlay').style.display = 'flex';
                 document.querySelectorAll('.tutorial-step').forEach(step => step.classList.remove('active'));
                 document.getElementById('tutorial-step-1').classList.add('active');
+                this.playSound('click');
             }
             
             hideTutorial() {
                 this.tutorialActive = false;
                 document.getElementById('tutorial-overlay').style.display = 'none';
+                this.playSound('click');
             }
             
             nextTutorialStep(stepNumber) {
@@ -3035,23 +3916,22 @@
                 document.querySelectorAll('.tutorial-step').forEach(step => step.classList.remove('active'));
                 document.getElementById(`tutorial-step-${stepNumber}`).classList.add('active');
                 
-                // If step 2, highlight the keyboard
                 if (stepNumber === 2) {
                     this.highlightTutorialElement('key-A');
                 }
+                this.playSound('click');
             }
             
             prevTutorialStep(stepNumber) {
                 this.tutorialStep = stepNumber;
                 document.querySelectorAll('.tutorial-step').forEach(step => step.classList.remove('active'));
                 document.getElementById(`tutorial-step-${stepNumber}`).classList.add('active');
+                this.playSound('click');
             }
             
             highlightTutorialElement(elementId) {
-                // Remove previous highlights
                 document.querySelectorAll('.tutorial-highlight').forEach(el => el.classList.remove('tutorial-highlight'));
                 
-                // Add highlight to specified element
                 const element = document.getElementById(elementId);
                 if (element) {
                     element.classList.add('tutorial-highlight');
@@ -3061,12 +3941,13 @@
             startPractice() {
                 this.hideTutorial();
                 this.showNotification('Sekarang coba sendiri! Tekan beberapa huruf di keyboard.', 'success');
+                this.playSound('click');
             }
             
             initializeVoiceGuide() {
                 this.voiceGuideSteps = [
                     {
-                        text: "Selamat datang di Mesin Enigma Simulator! Saya akan memandu Anda memahami mesin enkripsi legendaris ini.",
+                        text: "Selamat datang di Mesin Enigma Simulator Pro! Saya akan memandu Anda memahami mesin enkripsi legendaris ini.",
                         highlight: null
                     },
                     {
@@ -3112,7 +3993,6 @@
                 
                 voiceText.textContent = voiceStep.text;
                 
-                // Highlight element if specified
                 const highlightBox = document.getElementById('tutorial-highlight');
                 if (voiceStep.highlight) {
                     const element = document.getElementById(voiceStep.highlight);
@@ -3136,12 +4016,22 @@
                 } else {
                     this.endVoiceGuide();
                 }
+                this.playSound('click');
             }
             
             endVoiceGuide() {
                 document.getElementById('tutorial-voice').style.display = 'none';
                 document.getElementById('tutorial-highlight').style.display = 'none';
                 this.showNotification("Panduan selesai! Sekarang coba gunakan Mesin Enigma sendiri.", 'success');
+                this.playSound('click');
+            }
+            
+            previewCompleteSound() {
+                this.playSound('tick');
+                setTimeout(() => this.playSound('rotor'), 100);
+                setTimeout(() => this.playSound('tick'), 200);
+                setTimeout(() => this.playSound('click'), 300);
+                this.showNotification('Memainkan rangkaian suara lengkap', 'info');
             }
             
             showComponentInfo(component) {
@@ -3178,8 +4068,8 @@
                         break;
                     case 'reflector':
                         title = '🔄 REFLEKTOR (UKW)';
-                        description = 'Reflektor mengirim sinyal kembali melalui rotor setelah melewati semua rotor maju. Ini membuat Enigma bisa mendekripsi dengan pengaturan yang sama. UKW-B adalah reflektor standar.';
-                        example = 'UKW-B mengubah: A→Y, B→R, C→U, D→H, E→Q, F→S, G→L, dst. Setiap huruf selalu dipetakan ke huruf berbeda.';
+                        description = 'Reflektor mengirim sinyal kembali melalui rotor setelah melewati semua rotor maju. Ini membuat Enigma bisa mendekripsi dengan pengaturan yang sama. UKW-B dan UKW-C adalah reflektor standar dengan wiring berbeda.';
+                        example = 'UKW-B mengubah: A→Y, B→R, C→U, D→H, E→Q, F→S, G→L, dst. UKW-C memiliki wiring yang berbeda untuk variasi enkripsi.';
                         break;
                 }
                 
@@ -3194,12 +4084,12 @@
                     </div>
                 `;
                 
-                // Position near the info button
                 const btn = document.getElementById(`${component}-info-btn`);
                 const rect = btn.getBoundingClientRect();
                 info.style.left = `${rect.left - 320}px`;
                 info.style.top = `${rect.top}px`;
                 info.style.display = 'block';
+                this.playSound('click');
             }
             
             showHelp() {
@@ -3208,39 +4098,55 @@
                     1. Tekan huruf di keyboard untuk enkripsi<br>
                     2. Atur rotor dan plugboard untuk pengaturan berbeda<br>
                     3. Klik tutorial untuk panduan lengkap<br>
-                    4. Aktifkan "Visualisasi Cepat" untuk melihat proses detail
+                    4. Aktifkan "Visualisasi Cepat" untuk melihat proses detail<br>
+                    5. Gunakan tombol suara untuk kontrol audio
                 `, 'info');
+                this.playSound('click');
             }
             
             showAbout() {
                 this.showNotification(`
-                    <strong>Mesin Enigma Simulator</strong><br>
-                    Versi: Enhanced dengan Visualisasi Sinyal<br>
+                    <strong>Mesin Enigma Simulator Pro</strong><br>
+                    Versi: Enhanced dengan Sistem Suara<br>
                     Dibuat oleh: Evan Fauzan<br>
                     Tujuan: Edukasi kriptografi dan sejarah<br>
-                    Fitur: Visualisasi langkah demi langkah, tutorial interaktif, multi-tema
+                    Fitur: Visualisasi langkah demi langkah, tutorial interaktif, multi-tema, sistem suara lengkap
                 `, 'info');
+                this.playSound('click');
+            }
+            
+            showFeedback() {
+                this.showNotification(`
+                    <strong>Beri Masukan</strong><br>
+                    Simulator ini terus dikembangkan!<br>
+                    Fitur yang akan datang:<br>
+                    • More sound options<br>
+                    • Export as audio visualization<br>
+                    • Multi-language support<br>
+                    • Advanced encryption modes
+                `, 'info');
+                this.playSound('click');
             }
             
             showWelcomeMessage() {
                 setTimeout(() => {
                     this.showNotification(`
-                        <strong>Selamat datang di Mesin Enigma Simulator!</strong><br>
+                        <strong>Selamat datang di Mesin Enigma Simulator Pro!</strong><br>
                         Fitur baru:<br>
-                        • Pengaturan kecepatan animasi<br>
-                        • Pilihan tema visual (Glassmorphism, Aurora, dll)<br>
-                        • Mode gelap/terang<br>
-                        • Panduan suara interaktif<br>
-                        • Visualisasi cepat dengan kontrol penuh<br>
+                        • Sistem suara dengan berbagai pilihan<br>
+                        • Tombol UKW B dan C yang berfungsi penuh<br>
+                        • Kontrol volume dan jenis suara<br>
+                        • Umpan balik haptic<br>
+                        • Pengaturan lanjutan yang dapat diekspor<br>
                         Klik tombol TUTORIAL untuk memulai!
                     `, 'success');
+                    this.playSound('tick');
                 }, 1000);
             }
             
             showNotification(message, type) {
                 const container = document.getElementById('notification-container');
                 
-                // Remove existing notifications
                 document.querySelectorAll('.notification').forEach(n => {
                     n.style.animation = 'slideInRight 0.5s ease-out reverse';
                     setTimeout(() => n.remove(), 500);
@@ -3250,7 +4156,6 @@
                 notification.className = 'notification';
                 notification.innerHTML = message;
                 
-                // Set color based on type
                 if (type === 'error') {
                     notification.style.borderColor = 'var(--accent-tertiary)';
                 } else if (type === 'success') {
@@ -3261,7 +4166,6 @@
                 
                 container.appendChild(notification);
                 
-                // Remove after 5 seconds
                 setTimeout(() => {
                     notification.style.animation = 'slideInRight 0.5s ease-out reverse';
                     setTimeout(() => notification.remove(), 500);
@@ -3272,6 +4176,8 @@
                 this.hideTutorial();
                 document.getElementById('component-info').style.display = 'none';
                 document.getElementById('theme-panel').classList.remove('active');
+                document.getElementById('sound-panel').classList.remove('active');
+                document.getElementById('advanced-panel').classList.remove('active');
                 document.getElementById('quick-visualization').classList.remove('active');
                 document.getElementById('tutorial-voice').style.display = 'none';
                 document.getElementById('tutorial-highlight').style.display = 'none';
@@ -3282,21 +4188,66 @@
                 this.updatePlugboardDisplay();
                 document.getElementById('char-count').textContent = this.enigma.charactersProcessed;
                 this.updateHistoryPreview();
+                
+                // Update UKW buttons
+                document.querySelectorAll('.ukw-btn').forEach(btn => {
+                    if (btn.dataset.ukw === this.enigma.reflector) {
+                        btn.classList.add('active');
+                    } else {
+                        btn.classList.remove('active');
+                    }
+                });
             }
         }
 
         // Initialize when page loads
         document.addEventListener('DOMContentLoaded', () => {
-            // Create and initialize the enhanced UI controller
             window.enigmaUI = new EnhancedEnigmaUIController();
             
-            // Auto-start voice guide for first-time users
             if (!localStorage.getItem('enigma_tutorial_completed')) {
                 setTimeout(() => {
                     window.enigmaUI.startVoiceGuide();
                     localStorage.setItem('enigma_tutorial_completed', 'true');
                 }, 2000);
             }
+            
+            // Add toggle switch styling
+            const style = document.createElement('style');
+            style.textContent = `
+                .toggle-switch {
+                    position: relative;
+                    display: inline-block;
+                    width: 50px;
+                    height: 24px;
+                }
+                
+                .toggle-switch:after {
+                    content: '';
+                    position: absolute;
+                    width: 20px;
+                    height: 20px;
+                    border-radius: 50%;
+                    background-color: white;
+                    top: 2px;
+                    left: 2px;
+                    transition: all 0.3s;
+                }
+                
+                input[type="checkbox"]:checked + .toggle-switch {
+                    background-color: var(--accent-quaternary);
+                }
+                
+                input[type="checkbox"]:checked + .toggle-switch:after {
+                    left: 28px;
+                }
+                
+                input[type="checkbox"] + .toggle-switch {
+                    background-color: #4a5568;
+                    border-radius: 12px;
+                    cursor: pointer;
+                }
+            `;
+            document.head.appendChild(style);
         });
     </script>
 </body>
